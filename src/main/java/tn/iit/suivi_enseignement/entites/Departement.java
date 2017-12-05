@@ -10,19 +10,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "salles")
-public class Salle implements Serializable {
+@Table(name = "dep")
+public class Departement implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cod_salle")
+	@Column(name = "cod_dep")
 	private Integer id;
 
-	@Column(name = "nom_salle")
-	private String nomSalle;
+	@Column(name = "nom_dep")
+	private String nom;
 
-	public Salle() {
+	public Departement() {
 	}
 
 	public Integer getId() {
@@ -33,19 +33,19 @@ public class Salle implements Serializable {
 		this.id = id;
 	}
 
-	public String getNomSalle() {
-		return this.nomSalle;
+	public String getNom() {
+		return nom;
 	}
 
-	public void setNomSalle(String nomSalle) {
-		this.nomSalle = nomSalle;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + id;
 		return result;
 	}
 
@@ -57,11 +57,8 @@ public class Salle implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Salle other = (Salle) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		Departement other = (Departement) obj;
+		if (id != other.id)
 			return false;
 		return true;
 	}

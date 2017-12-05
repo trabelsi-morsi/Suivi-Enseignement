@@ -75,4 +75,9 @@ public class Seance implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Seance [id=" + id + ", duree=" + duree + ", nom=" + nom + "]";
+	}
+
 }

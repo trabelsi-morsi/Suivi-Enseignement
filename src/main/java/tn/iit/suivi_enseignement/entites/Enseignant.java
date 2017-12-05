@@ -10,19 +10,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "dep")
-public class Departement implements Serializable {
+@Table(name = "ensig")
+public class Enseignant implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cod_dep")
+	@Column(name = "cod_enseig")
 	private Integer id;
 
-	@Column(name = "nom_dep")
+	@Column(name = "nom_ensi")
 	private String nom;
 
-	public Departement() {
+	public Enseignant() {
 	}
 
 	public Integer getId() {
@@ -42,6 +42,11 @@ public class Departement implements Serializable {
 	}
 
 	@Override
+	public String toString() {
+		return "Enseignant [id=" + id + ", nom=" + nom + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -57,15 +62,10 @@ public class Departement implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Departement other = (Departement) obj;
+		Enseignant other = (Enseignant) obj;
 		if (id != other.id)
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Departement [id=" + id + ", nom=" + nom + "]";
 	}
 
 }

@@ -66,4 +66,9 @@ public class Salle implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Salle [id=" + id + ", nomSalle=" + nomSalle + "]";
+	}
+
 }

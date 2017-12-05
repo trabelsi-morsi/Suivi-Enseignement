@@ -14,29 +14,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.iit.suivi_enseignement.dao.SalleDao;
-import tn.iit.suivi_enseignement.entites.Salle;
+import tn.iit.suivi_enseignement.dao.SeanceDao;
+import tn.iit.suivi_enseignement.entites.Seance;
 
 @RestController
-@RequestMapping("/salle")
-public class SalleController {
+@RequestMapping("/seance")
+public class SeanceController {
 
 	@Autowired
-	private SalleDao salleDao;
+	private SeanceDao seanceDao;
 
 	@PostMapping
-	public ResponseEntity<Salle> createOrUpdate(@RequestBody Salle salle) {
-		Salle s = salleDao.saveAndFlush(salle);
+	public ResponseEntity<Seance> createOrUpdate(@RequestBody Seance salle) {
+		Seance s = seanceDao.saveAndFlush(salle);
 		return new ResponseEntity<>(s, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Salle> delete(@PathVariable Integer id) {
-		Salle s = null;
-		ResponseEntity<Salle> response = null;
-		if (salleDao.findOne(id) != null) {
-			s = salleDao.findOne(id);
-			salleDao.delete(id);
+	public ResponseEntity<Seance> delete(@PathVariable Integer id) {
+		Seance s = null;
+		ResponseEntity<Seance> response = null;
+		if (seanceDao.findOne(id) != null) {
+			s = seanceDao.findOne(id);
+			seanceDao.delete(id);
 			response = new ResponseEntity<>(s, HttpStatus.OK);
 		} else {
 			response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -48,14 +48,14 @@ public class SalleController {
 
 	@GetMapping("/{id}")
 	@ResponseBody
-	public Salle getOne(@PathVariable Integer id) {
-		return salleDao.findOne(id);
+	public Seance getOne(@PathVariable Integer id) {
+		return seanceDao.findOne(id);
 	}
 
 	@GetMapping
 	@ResponseBody
-	public List<Salle> list() {
-		return salleDao.findAll();
+	public List<Seance> list() {
+		return seanceDao.findAll();
 	}
 
 }

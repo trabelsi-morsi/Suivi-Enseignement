@@ -34,8 +34,7 @@ public class SalleController {
 	public ResponseEntity<Salle> delete(@PathVariable Integer id) {
 		Salle s = null;
 		ResponseEntity<Salle> response = null;
-		if (salleDao.findOne(id) != null) {
-			s = salleDao.findOne(id);
+		if ((s=salleDao.findOne(id)) != null) {
 			salleDao.delete(id);
 			response = new ResponseEntity<>(s, HttpStatus.OK);
 		} else {

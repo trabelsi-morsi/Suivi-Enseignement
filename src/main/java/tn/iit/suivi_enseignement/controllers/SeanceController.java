@@ -34,8 +34,7 @@ public class SeanceController {
 	public ResponseEntity<Seance> delete(@PathVariable Integer id) {
 		Seance s = null;
 		ResponseEntity<Seance> response = null;
-		if (seanceDao.findOne(id) != null) {
-			s = seanceDao.findOne(id);
+		if ((s=seanceDao.findOne(id) )!= null) {
 			seanceDao.delete(id);
 			response = new ResponseEntity<>(s, HttpStatus.OK);
 		} else {

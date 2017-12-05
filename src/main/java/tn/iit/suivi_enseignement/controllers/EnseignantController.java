@@ -32,12 +32,11 @@ public class EnseignantController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Enseignant> delete(@PathVariable Integer id) {
 
-		Enseignant dep = null;
+		Enseignant ens = null;
 		ResponseEntity<Enseignant> response = null;
-		if (enseignantDao.findOne(id) != null) {
-			dep = enseignantDao.findOne(id);
+		if ((ens=enseignantDao.findOne(id)) != null) {
 			enseignantDao.delete(id);
-			response = new ResponseEntity<>(dep, HttpStatus.OK);
+			response = new ResponseEntity<>(ens, HttpStatus.OK);
 		} else {
 			response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}

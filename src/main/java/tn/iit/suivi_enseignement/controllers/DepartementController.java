@@ -35,8 +35,7 @@ public class DepartementController {
 
 		Departement dep = null;
 		ResponseEntity<Departement> response = null;
-		if (departementDao.findOne(id) != null) {
-			dep = departementDao.findOne(id);
+		if ((dep=departementDao.findOne(id)) != null) {
 			departementDao.delete(id);
 			response = new ResponseEntity<>(dep, HttpStatus.OK);
 		} else {

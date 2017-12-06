@@ -1,12 +1,15 @@
 package tn.iit.suivi_enseignement.entites;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +25,9 @@ public class Seance implements Serializable {
 	private String duree;
 	@Column(name = "nom_seance")
 	private String nom;
+	
+	@OneToMany(mappedBy="seance", fetch=FetchType.EAGER)
+	private List<Enseignement> enseignements;
 
 	public Seance() {
 	}

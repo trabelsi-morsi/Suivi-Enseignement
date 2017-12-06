@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.iit.suivi_enseignement.dao.DepartementDao;
@@ -22,7 +21,7 @@ import tn.iit.suivi_enseignement.entites.Departement;
 public class DepartementController {
 
 	@Autowired
-	DepartementDao departementDao;
+	private DepartementDao departementDao;
 
 	@PostMapping
 	public ResponseEntity<Departement> createOrUpdate(@RequestBody Departement departement) {
@@ -35,7 +34,7 @@ public class DepartementController {
 
 		Departement dep = null;
 		ResponseEntity<Departement> response = null;
-		if ((dep=departementDao.findOne(id)) != null) {
+		if ((dep = departementDao.findOne(id)) != null) {
 			departementDao.delete(id);
 			response = new ResponseEntity<>(dep, HttpStatus.OK);
 		} else {
@@ -47,13 +46,11 @@ public class DepartementController {
 	}
 
 	@GetMapping("/{id}")
-	@ResponseBody
 	public Departement getOne(@PathVariable Integer id) {
 		return departementDao.findOne(id);
 	}
 
 	@GetMapping
-	@ResponseBody
 	public List<Departement> list() {
 		return departementDao.findAll();
 	}

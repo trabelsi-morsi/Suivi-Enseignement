@@ -32,42 +32,34 @@ public class Enseignement implements Serializable {
 	@Column(name = "semestre1")
 	private int semestre;
 
-	// bi-directional many-to-one association to enseignant
 	@ManyToOne
-	@JoinColumn(name = "COD_enseig")
+	@JoinColumn(name = "cod_enseig")
 	private Enseignant enseignant;
 
-	// bi-directional many-to-one association to Niveau
 	@ManyToOne
-	@JoinColumn(name = "COD_NIVEAU")
+	@JoinColumn(name = "cod_niveau")
 	private Niveau niveaux;
 
-	// bi-directional many-to-one association to Salle
 	@ManyToOne
 	@JoinColumn(name = "COD_salle")
 	private Salle salle;
 
-	// bi-directional many-to-one association to Jour
 	@ManyToOne
 	@JoinColumn(name = "cod_jour")
 	private Jour jour;
 
-	// bi-directional many-to-one association to Seance
 	@ManyToOne
 	@JoinColumn(name = "COD_senace")
 	private Seance seance;
 
-	// bi-directional many-to-one association to Departement
 	@ManyToOne
-	@JoinColumn(name = "COD_dep")
-	private Departement dep;
+	@JoinColumn(name = "cod_dep")
+	private Departement departement;
 
-	// bi-directional many-to-one association to Matiere
 	@ManyToOne
 	@JoinColumn(name = "COD_mat")
-	private Matiere mat;
+	private Matiere matiere;
 
-	// bi-directional many-to-one association to Pointage
 	@OneToMany(mappedBy = "enseignement", fetch = FetchType.EAGER)
 	private List<Pointage> pointages;
 
@@ -130,20 +122,20 @@ public class Enseignement implements Serializable {
 		this.seance = seance;
 	}
 
-	public Departement getDep() {
-		return this.dep;
+	public Departement getDepartement() {
+		return departement;
 	}
 
-	public void setDep(Departement dep) {
-		this.dep = dep;
+	public void setDepartement(Departement departement) {
+		this.departement = departement;
 	}
 
-	public Matiere getMat() {
-		return this.mat;
+	public Matiere getMatiere() {
+		return matiere;
 	}
 
-	public void setMat(Matiere mat) {
-		this.mat = mat;
+	public void setMatiere(Matiere matiere) {
+		this.matiere = matiere;
 	}
 
 	public List<Pointage> getPointages() {

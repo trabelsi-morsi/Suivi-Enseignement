@@ -13,29 +13,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.iit.suivi_enseignement.dao.SeanceDao;
-import tn.iit.suivi_enseignement.entites.Seance;
+import tn.iit.suivi_enseignement.dao.JourDao;
+import tn.iit.suivi_enseignement.entites.Jour;
 
 @RestController
-@RequestMapping("/seance")
-public class SeanceController {
+@RequestMapping("/jour")
+public class JourController {
 
 	@Autowired
-	private SeanceDao seanceDao;
+	private JourDao jourDao;
 
 	@PostMapping
-	public ResponseEntity<Seance> createOrUpdate(@RequestBody Seance seance) {
-		Seance s = seanceDao.saveAndFlush(seance);
-		return new ResponseEntity<>(s, HttpStatus.OK);
+	public ResponseEntity<Jour> createOrUpdate(@RequestBody Jour jour) {
+		Jour j = jourDao.saveAndFlush(jour);
+		return new ResponseEntity<>(j, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Seance> delete(@PathVariable Integer id) {
-		Seance s = null;
-		ResponseEntity<Seance> response = null;
-		if ((s = seanceDao.findOne(id)) != null) {
-			seanceDao.delete(id);
-			response = new ResponseEntity<>(s, HttpStatus.OK);
+	public ResponseEntity<Jour> delete(@PathVariable Integer id) {
+		Jour j = null;
+		ResponseEntity<Jour> response = null;
+		if ((j = jourDao.findOne(id)) != null) {
+			jourDao.delete(id);
+			response = new ResponseEntity<>(j, HttpStatus.OK);
 		} else {
 			response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
@@ -45,13 +45,13 @@ public class SeanceController {
 	}
 
 	@GetMapping("/{id}")
-	public Seance getOne(@PathVariable Integer id) {
-		return seanceDao.findOne(id);
+	public Jour getOne(@PathVariable Integer id) {
+		return jourDao.findOne(id);
 	}
 
 	@GetMapping
-	public List<Seance> list() {
-		return seanceDao.findAll();
+	public List<Jour> list() {
+		return jourDao.findAll();
 	}
 
 }

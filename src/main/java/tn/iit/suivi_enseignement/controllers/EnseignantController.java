@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.iit.suivi_enseignement.dao.EnseignantDao;
@@ -21,7 +20,7 @@ import tn.iit.suivi_enseignement.entites.Enseignant;
 @RequestMapping("/enseignant")
 public class EnseignantController {
 	@Autowired
-	EnseignantDao enseignantDao;
+	private EnseignantDao enseignantDao;
 
 	@PostMapping
 	public ResponseEntity<Enseignant> createOrUpdate(@RequestBody Enseignant enseignant) {
@@ -34,7 +33,7 @@ public class EnseignantController {
 
 		Enseignant ens = null;
 		ResponseEntity<Enseignant> response = null;
-		if ((ens=enseignantDao.findOne(id)) != null) {
+		if ((ens = enseignantDao.findOne(id)) != null) {
 			enseignantDao.delete(id);
 			response = new ResponseEntity<>(ens, HttpStatus.OK);
 		} else {
@@ -46,13 +45,11 @@ public class EnseignantController {
 	}
 
 	@GetMapping("/{id}")
-	@ResponseBody
 	public Enseignant getOne(@PathVariable Integer id) {
 		return enseignantDao.findOne(id);
 	}
 
 	@GetMapping
-	@ResponseBody
 	public List<Enseignant> list() {
 		return enseignantDao.findAll();
 	}

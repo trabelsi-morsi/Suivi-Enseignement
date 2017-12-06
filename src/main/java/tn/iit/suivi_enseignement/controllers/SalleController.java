@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.iit.suivi_enseignement.dao.SalleDao;
@@ -34,7 +33,7 @@ public class SalleController {
 	public ResponseEntity<Salle> delete(@PathVariable Integer id) {
 		Salle s = null;
 		ResponseEntity<Salle> response = null;
-		if ((s=salleDao.findOne(id)) != null) {
+		if ((s = salleDao.findOne(id)) != null) {
 			salleDao.delete(id);
 			response = new ResponseEntity<>(s, HttpStatus.OK);
 		} else {
@@ -46,13 +45,11 @@ public class SalleController {
 	}
 
 	@GetMapping("/{id}")
-	@ResponseBody
 	public Salle getOne(@PathVariable Integer id) {
 		return salleDao.findOne(id);
 	}
 
 	@GetMapping
-	@ResponseBody
 	public List<Salle> list() {
 		return salleDao.findAll();
 	}

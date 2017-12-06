@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.iit.suivi_enseignement.dao.SeanceDao;
@@ -34,7 +33,7 @@ public class SeanceController {
 	public ResponseEntity<Seance> delete(@PathVariable Integer id) {
 		Seance s = null;
 		ResponseEntity<Seance> response = null;
-		if ((s=seanceDao.findOne(id) )!= null) {
+		if ((s = seanceDao.findOne(id)) != null) {
 			seanceDao.delete(id);
 			response = new ResponseEntity<>(s, HttpStatus.OK);
 		} else {
@@ -46,13 +45,11 @@ public class SeanceController {
 	}
 
 	@GetMapping("/{id}")
-	@ResponseBody
 	public Seance getOne(@PathVariable Integer id) {
 		return seanceDao.findOne(id);
 	}
 
 	@GetMapping
-	@ResponseBody
 	public List<Seance> list() {
 		return seanceDao.findAll();
 	}

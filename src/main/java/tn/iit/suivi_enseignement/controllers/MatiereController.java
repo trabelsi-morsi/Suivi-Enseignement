@@ -13,28 +13,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tn.iit.suivi_enseignement.dao.SeanceDao;
-import tn.iit.suivi_enseignement.entites.Seance;
+import tn.iit.suivi_enseignement.dao.MatiereDao;
+import tn.iit.suivi_enseignement.entites.Matiere;
 
 @RestController
-@RequestMapping("/seance")
-public class SeanceController {
+@RequestMapping("/matiere")
+public class MatiereController {
 
 	@Autowired
-	private SeanceDao seanceDao;
+	private MatiereDao matiereDao;
 
 	@PostMapping
-	public ResponseEntity<Seance> createOrUpdate(@RequestBody Seance seance) {
-		Seance s = seanceDao.saveAndFlush(seance);
+	public ResponseEntity<Matiere> createOrUpdate(@RequestBody Matiere matiere) {
+		Matiere s = matiereDao.saveAndFlush(matiere);
 		return new ResponseEntity<>(s, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Seance> delete(@PathVariable Integer id) {
-		Seance s = null;
-		ResponseEntity<Seance> response = null;
-		if ((s = seanceDao.findOne(id)) != null) {
-			seanceDao.delete(id);
+	public ResponseEntity<Matiere> delete(@PathVariable Integer id) {
+		Matiere s = null;
+		ResponseEntity<Matiere> response = null;
+		if ((s = matiereDao.findOne(id)) != null) {
+			matiereDao.delete(id);
 			response = new ResponseEntity<>(s, HttpStatus.OK);
 		} else {
 			response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -45,13 +45,13 @@ public class SeanceController {
 	}
 
 	@GetMapping("/{id}")
-	public Seance getOne(@PathVariable Integer id) {
-		return seanceDao.findOne(id);
+	public Matiere getOne(@PathVariable Integer id) {
+		return matiereDao.findOne(id);
 	}
 
 	@GetMapping
-	public List<Seance> list() {
-		return seanceDao.findAll();
+	public List<Matiere> list() {
+		return matiereDao.findAll();
 	}
 
 }

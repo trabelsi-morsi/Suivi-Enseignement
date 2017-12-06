@@ -24,8 +24,8 @@ public class Enseignant implements Serializable {
 
 	@Column(name = "nom_ensi")
 	private String nom;
-	
-	@OneToMany(mappedBy="enseignant", fetch=FetchType.EAGER)
+
+	@OneToMany(mappedBy = "enseignant", fetch = FetchType.EAGER)
 	private List<Enseignement> enseignements;
 
 	public Enseignant() {
@@ -45,6 +45,14 @@ public class Enseignant implements Serializable {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	public List<Enseignement> getEnseignements() {
+		return enseignements;
+	}
+
+	public void setEnseignements(List<Enseignement> enseignements) {
+		this.enseignements = enseignements;
 	}
 
 	@Override

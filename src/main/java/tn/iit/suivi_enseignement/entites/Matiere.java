@@ -1,12 +1,15 @@
 package tn.iit.suivi_enseignement.entites;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,15 +26,10 @@ public class Matiere implements Serializable {
 	@Column(name = "nom_matiere")
 	private String nom_matiere;
 
+	@OneToMany(mappedBy = "matiere", fetch = FetchType.EAGER)
+	private List<Enseignement> enseignements;
+
 	public Matiere() {
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getAbvreviation() {
@@ -48,6 +46,22 @@ public class Matiere implements Serializable {
 
 	public void setNom_matiere(String nom_matiere) {
 		this.nom_matiere = nom_matiere;
+	}
+
+	public List<Enseignement> getEnseignements() {
+		return enseignements;
+	}
+
+	public void setEnseignements(List<Enseignement> enseignements) {
+		this.enseignements = enseignements;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override
@@ -70,6 +84,12 @@ public class Matiere implements Serializable {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Matiere [id=" + id + ", abvreviation=" + abvreviation + ", nom_matiere=" + nom_matiere
+				+ ", enseignements=" + enseignements + "]";
 	}
 
 }

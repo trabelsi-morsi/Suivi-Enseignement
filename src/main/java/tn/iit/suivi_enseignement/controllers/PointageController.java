@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import tn.iit.suivi_enseignement.dao.EnseignementDao;
 import tn.iit.suivi_enseignement.dao.PointageDao;
+import tn.iit.suivi_enseignement.dto.PointageDto;
+import tn.iit.suivi_enseignement.entites.Enseignement;
 import tn.iit.suivi_enseignement.entites.Pointage;
 
 @RestController
@@ -22,11 +25,17 @@ public class PointageController {
 
 	@Autowired
 	private PointageDao pointageDao;
+	@Autowired
+	private EnseignementDao enseignementDao;
 
 	@PostMapping
-	public ResponseEntity<Pointage> createOrUpdate(@RequestBody Pointage pointage) {
-		Pointage p = pointageDao.saveAndFlush(pointage);
-		return new ResponseEntity<>(p, HttpStatus.OK);
+	public ResponseEntity<Pointage> createOrUpdate(@RequestBody PointageDto pointageDto) {
+
+		Enseignement enseignement = enseignementDao.findOne(pointageDto.getEnseignement());
+
+		Pointage pointage = pointageDto.toPointage(enseignement);
+		pointageDao.saveAndFlush(pointage);
+		return new ResponseEntity<>(pointage, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")

@@ -20,9 +20,9 @@ public class Pointage implements Serializable {
 	private Integer id;
 	@Column
 	private String date;
-	
+
 	@ManyToOne
-	@JoinColumn(name="idBase")
+	@JoinColumn(name = "idBase")
 	private Enseignement enseignement;
 
 	public Pointage() {
@@ -42,6 +42,14 @@ public class Pointage implements Serializable {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public Enseignement getEnseignement() {
+		return enseignement;
+	}
+
+	public void setEnseignement(Enseignement enseignement) {
+		this.enseignement = enseignement;
 	}
 
 	@Override
@@ -73,7 +81,5 @@ public class Pointage implements Serializable {
 	public String toString() {
 		return "Pointage [id=" + id + ", date=" + date + ", enseignement=" + enseignement + "]";
 	}
-	
-	
 
 }

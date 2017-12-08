@@ -1,17 +1,14 @@
 package tn.iit.suivi_enseignement.entites;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Enseignement implements Serializable {
@@ -59,9 +56,6 @@ public class Enseignement implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "COD_mat")
 	private Matiere matiere;
-
-	@OneToMany(mappedBy = "enseignement", fetch = FetchType.EAGER)
-	private List<Pointage> pointages;
 
 	public Enseignement() {
 	}
@@ -136,14 +130,6 @@ public class Enseignement implements Serializable {
 
 	public void setMatiere(Matiere matiere) {
 		this.matiere = matiere;
-	}
-
-	public List<Pointage> getPointages() {
-		return this.pointages;
-	}
-
-	public void setPointages(List<Pointage> pointages) {
-		this.pointages = pointages;
 	}
 
 	public Integer getId() {

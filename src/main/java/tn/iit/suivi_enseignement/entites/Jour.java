@@ -1,15 +1,12 @@
 package tn.iit.suivi_enseignement.entites;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,9 +21,6 @@ public class Jour implements Serializable {
 
 	@Column(name = "nom_jour")
 	private String nom;
-	
-	@OneToMany(mappedBy="jour", fetch=FetchType.EAGER)
-	private List<Enseignement> enseignements;
 
 	public Jour() {
 	}
@@ -45,14 +39,6 @@ public class Jour implements Serializable {
 
 	public void setNom(String nom) {
 		this.nom = nom;
-	}
-	
-	public List<Enseignement> getEnseignements() {
-		return enseignements;
-	}
-
-	public void setEnseignements(List<Enseignement> enseignements) {
-		this.enseignements = enseignements;
 	}
 
 	@Override

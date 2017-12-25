@@ -1,17 +1,14 @@
 package tn.iit.suivi_enseignement.entites;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Enseignement implements Serializable {
@@ -59,9 +56,6 @@ public class Enseignement implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "COD_mat")
 	private Matiere matiere;
-
-	@OneToMany(mappedBy = "enseignement", fetch = FetchType.EAGER)
-	private List<Pointage> pointages;
 
 	public Enseignement() {
 	}
@@ -138,14 +132,6 @@ public class Enseignement implements Serializable {
 		this.matiere = matiere;
 	}
 
-	public List<Pointage> getPointages() {
-		return this.pointages;
-	}
-
-	public void setPointages(List<Pointage> pointages) {
-		this.pointages = pointages;
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -176,6 +162,31 @@ public class Enseignement implements Serializable {
 
 	public void setEnseignant(Enseignant enseignant) {
 		this.enseignant = enseignant;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Enseignement other = (Enseignement) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 }

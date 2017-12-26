@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import tn.iit.suivi_enseignement.dao.DepartementDao;
 import tn.iit.suivi_enseignement.dao.EnseignantDao;
 import tn.iit.suivi_enseignement.dao.EnseignementDao;
-import tn.iit.suivi_enseignement.dao.JourDao;
 import tn.iit.suivi_enseignement.dao.MatiereDao;
 import tn.iit.suivi_enseignement.dao.NiveauDao;
 import tn.iit.suivi_enseignement.dao.SalleDao;
@@ -26,7 +25,6 @@ import tn.iit.suivi_enseignement.dto.EnseignementDto;
 import tn.iit.suivi_enseignement.entites.Departement;
 import tn.iit.suivi_enseignement.entites.Enseignant;
 import tn.iit.suivi_enseignement.entites.Enseignement;
-import tn.iit.suivi_enseignement.entites.Jour;
 import tn.iit.suivi_enseignement.entites.Matiere;
 import tn.iit.suivi_enseignement.entites.Niveau;
 import tn.iit.suivi_enseignement.entites.Salle;
@@ -34,7 +32,7 @@ import tn.iit.suivi_enseignement.entites.Seance;
 
 @RestController
 @RequestMapping("/enseignement")
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 public class EnseignementController {
 
 	@Autowired
@@ -43,8 +41,6 @@ public class EnseignementController {
 	private EnseignantDao enseignantDao;
 	@Autowired
 	private DepartementDao departementDao;
-	@Autowired
-	private JourDao jourDao;
 	@Autowired
 	private MatiereDao matiereDao;
 	@Autowired
@@ -59,14 +55,12 @@ public class EnseignementController {
 
 		Departement departement = departementDao.findOne(ensDto.getDepartement());
 		Enseignant enseignant = enseignantDao.findOne(ensDto.getEnseignant());
-		Jour jour = jourDao.findOne(ensDto.getJour());
 		Matiere matiere = matiereDao.findOne(ensDto.getMatiere());
 		Niveau niveau = niveauDao.findOne(ensDto.getNiveaux());
 		Salle salle = salleDao.findOne(ensDto.getSalle());
 		Seance seance = seanceDao.findOne(ensDto.getSeance());
 
-		Enseignement enseignement = ensDto.toEnseignement(enseignant, niveau, salle, jour, seance, departement,
-				matiere);
+		Enseignement enseignement = ensDto.toEnseignement(enseignant, niveau, salle, seance, departement, matiere);
 
 		enseignementDao.saveAndFlush(enseignement);
 

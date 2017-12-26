@@ -1,9 +1,11 @@
 package tn.iit.suivi_enseignement.dto;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import tn.iit.suivi_enseignement.entites.Departement;
 import tn.iit.suivi_enseignement.entites.Enseignant;
 import tn.iit.suivi_enseignement.entites.Enseignement;
-import tn.iit.suivi_enseignement.entites.Jour;
 import tn.iit.suivi_enseignement.entites.Matiere;
 import tn.iit.suivi_enseignement.entites.Niveau;
 import tn.iit.suivi_enseignement.entites.Salle;
@@ -16,16 +18,16 @@ public class EnseignementDto {
 	private int module;
 	private int par15;
 	private int semestre;
+	private String date;
 
 	private Integer enseignant;
 	private Integer niveaux;
 	private Integer salle;
-	private Integer jour;
 	private Integer seance;
 	private Integer departement;
 	private Integer matiere;
 
-	public Enseignement toEnseignement(Enseignant e, Niveau n, Salle s, Jour j, Seance se, Departement dep, Matiere m) {
+	public Enseignement toEnseignement(Enseignant e, Niveau n, Salle s, Seance se, Departement dep, Matiere m) {
 
 		Enseignement ens = new Enseignement();
 		ens.setId(id);
@@ -34,11 +36,17 @@ public class EnseignementDto {
 		ens.setModule(module);
 		ens.setPar15(par15);
 		ens.setSemestre(semestre);
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+		try {
+			ens.setDate(formatter.parse(date));
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
 
 		ens.setEnseignant(e);
 		ens.setNiveaux(n);
 		ens.setSalle(s);
-		ens.setJour(j);
 		ens.setSeance(se);
 		ens.setDepartement(dep);
 		ens.setMatiere(m);
@@ -117,12 +125,12 @@ public class EnseignementDto {
 		this.salle = salle;
 	}
 
-	public Integer getJour() {
-		return jour;
+	public String getDate() {
+		return date;
 	}
 
-	public void setJour(Integer jour) {
-		this.jour = jour;
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public Integer getSeance() {

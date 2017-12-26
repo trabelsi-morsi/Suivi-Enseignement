@@ -6,5 +6,5 @@ target
 
 .settings
 .springBeans 
-.idea
+.idea/
 *.iml

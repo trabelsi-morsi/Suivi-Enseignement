@@ -1,14 +1,11 @@
 package tn.iit.suivi_enseignement.entites;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Enseignement implements Serializable {
@@ -53,7 +50,7 @@ public class Enseignement implements Serializable {
 	@JoinColumn(name = "cod_dep")
 	private Departement departement;
 
-	@ManyToOne
+	@ManyToOne(cascade= CascadeType.REMOVE)
 	@JoinColumn(name = "COD_mat")
 	private Matiere matiere;
 

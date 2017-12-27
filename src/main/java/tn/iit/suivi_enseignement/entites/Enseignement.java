@@ -32,6 +32,8 @@ public class Enseignement implements Serializable {
 	private int par15;
 	@Column(name = "semestre1")
 	private int semestre;
+	@Column(name = "rate")
+	private boolean rate;
 
 	@ManyToOne
 	@JoinColumn(name = "cod_enseig")
@@ -174,6 +176,14 @@ public class Enseignement implements Serializable {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
+	}
+
+	public boolean isRate() {
+		return rate;
+	}
+
+	public void setRate(boolean rate) {
+		this.rate = rate;
 	}
 
 	@Override

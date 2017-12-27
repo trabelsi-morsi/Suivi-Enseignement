@@ -114,6 +114,8 @@ public class EnseignementController {
 
 		try {
 			EmailUtility.sendEmail(host, port, userName, password, mailEns, subject, message);
+			ens.setRate(true);
+			enseignementDao.saveAndFlush(ens);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}

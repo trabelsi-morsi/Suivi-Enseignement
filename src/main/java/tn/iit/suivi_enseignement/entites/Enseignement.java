@@ -1,7 +1,9 @@
 package tn.iit.suivi_enseignement.entites;
 
 import java.io.Serializable;
+import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Enseignement implements Serializable {
@@ -41,9 +45,9 @@ public class Enseignement implements Serializable {
 	@JoinColumn(name = "COD_salle")
 	private Salle salle;
 
-	@ManyToOne
-	@JoinColumn(name = "cod_jour")
-	private Jour jour;
+	@Column(name = "dateEns")
+	@Temporal(TemporalType.DATE)
+	private Date date;
 
 	@ManyToOne
 	@JoinColumn(name = "COD_senace")
@@ -53,7 +57,7 @@ public class Enseignement implements Serializable {
 	@JoinColumn(name = "cod_dep")
 	private Departement departement;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "COD_mat")
 	private Matiere matiere;
 
@@ -100,12 +104,12 @@ public class Enseignement implements Serializable {
 		this.salle = salle;
 	}
 
-	public Jour getJour() {
-		return this.jour;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setJour(Jour jour) {
-		this.jour = jour;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public Seance getSeance() {
@@ -162,6 +166,31 @@ public class Enseignement implements Serializable {
 
 	public void setEnseignant(Enseignant enseignant) {
 		this.enseignant = enseignant;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Enseignement other = (Enseignement) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 }

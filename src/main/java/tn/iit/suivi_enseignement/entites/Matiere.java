@@ -34,11 +34,11 @@ public class Matiere implements Serializable {
 		this.abvreviation = abvreviation;
 	}
 
-	public String getNom_matiere() {
+	public String getNom() {
 		return nom;
 	}
 
-	public void setNom_matiere(String nom) {
+	public void setNom(String nom) {
 		this.nom = nom;
 	}
 

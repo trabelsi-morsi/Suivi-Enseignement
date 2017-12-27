@@ -101,8 +101,8 @@ public class EnseignementController {
 
 		Enseignement ens = getOne(id);
 		String subject = "Avis de seance non effectu�e";
-		String userName = "trabelsi.morsi";
-		String password = "23938315";
+		String userName = "suivi.ens";
+		String password = "suivi.ens2018";
 		String host = "smtp.gmail.com";
 		String port = "587";
 

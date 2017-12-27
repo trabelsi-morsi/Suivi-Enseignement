@@ -1,5 +1,6 @@
 package tn.iit.suivi_enseignement.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -94,6 +95,10 @@ public class EnseignementController {
 	@GetMapping
 	public List<Enseignement> list() {
 		return enseignementDao.findAll();
+	}
+	@GetMapping("/today")
+	public List<Enseignement> listEnsToday() {
+		return enseignementDao.findByDate(new Date());
 	}
 
 	@GetMapping("/mail/{id}")

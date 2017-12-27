@@ -2,6 +2,8 @@ package tn.iit.suivi_enseignement.controllers;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import tn.iit.suivi_enseignement.config.EmailUtility;
 import tn.iit.suivi_enseignement.dao.DepartementDao;
 import tn.iit.suivi_enseignement.dao.EnseignantDao;
 import tn.iit.suivi_enseignement.dao.EnseignementDao;
@@ -91,6 +94,29 @@ public class EnseignementController {
 	@GetMapping
 	public List<Enseignement> list() {
 		return enseignementDao.findAll();
+	}
+
+	@GetMapping("/mail/{id}")
+	public void sendMail(@PathVariable Integer id) {
+
+		Enseignement ens = getOne(id);
+		String subject = "Avis de seance non effectu�e";
+		String userName = "trabelsi.morsi";
+		String password = "23938315";
+		String host = "smtp.gmail.com";
+		String port = "587";
+
+		String mailEns = ens.getEnseignant().getEmail();
+		String nomEns = ens.getEnseignant().getNom();
+		String nomGroupe = ens.getNiveaux().getNom();
+		String message = "Bonjour Mr " + nomEns + " , la seance de " + ens.getSeance().getNom() + " le " + ens.getDate()
+				+ " avec le groupe " + nomGroupe + " a été raté , veuillez planifier une seance de rattrappage ";
+
+		try {
+			EmailUtility.sendEmail(host, port, userName, password, mailEns, subject, message);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -18,6 +18,8 @@ public class Registre implements Serializable {
 	private String password;
 	@Column(name = "username")
 	private String userName;
+	@Column
+	private boolean isAdmin;
 
 	public Registre() {
 	}
@@ -28,6 +30,14 @@ public class Registre implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 	public String getDateNaissance() {

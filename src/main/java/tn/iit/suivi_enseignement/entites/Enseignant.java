@@ -25,6 +25,9 @@ public class Enseignant implements Serializable {
 	@Column(name = "mail")
 	private String email;
 
+	@Column(name = "tel")
+	private String telephone;
+
 	public Enseignant() {
 	}
 
@@ -50,6 +53,14 @@ public class Enseignant implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 
 	@Override
